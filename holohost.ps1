@@ -14,8 +14,13 @@ if ($answer -eq 'yes') {
 ((Get-Content -path $cfgpath -Raw) -replace 'kernelopt=runweasel cdromBoot','kernelopt=runweasel ks=usb:/KS.CFG cdromBoot') | Set-Content -Path $cfgpath
 
 
-Invoke-WebRequest -Uri "https://raw.githubusercontent.com/neoof86/HoloHost/main/ks.cfg" -OutFile "$drivepath\ks.cfg" -UseBasicParsing -PassThru
+#Parameters
+$URL = "https://raw.githubusercontent.com/neoof86/HoloHost/main/ks.cfg"
+$DownloadPath = "$drivepath ks.cfg"
+ 
+Start-BitsTransfer -Source $URL -Destination $DownloadPath
 
+Write-Host "All done! Remember to disable Secure Boot in your BIOS!!! Enjoy :)"
 } else {
 Write-Host "Bye!"
 } 
