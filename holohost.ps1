@@ -14,9 +14,7 @@ if ($answer -eq 'yes') {
 ((Get-Content -path $cfgpath -Raw) -replace 'kernelopt=runweasel cdromBoot','kernelopt=runweasel ks=usb:/KS.CFG cdromBoot') | Set-Content -Path $cfgpath
 
 
-Invoke-WebRequest -Uri "https://raw.githubusercontent.com/neoof86/HoloHost/main/ks.cfg" -OutFile "$cfgpath\ks.cfg" -UseBasicParsing -PassThru | Write-Progress -Activity "Downloading file" -Status "Progress"
-
-Copy-Item $env:TEMP\kstest.cfg -Destination "$drivepath"
+Invoke-WebRequest -Uri "https://raw.githubusercontent.com/neoof86/HoloHost/main/ks.cfg" -OutFile "$drivepath\ks.cfg" -UseBasicParsing -PassThru | Write-Progress -Activity "Downloading file" -Status "Progress"
 
 } else {
 Write-Host "Bye!"
